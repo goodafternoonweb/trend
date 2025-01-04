@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-section">
+    <img src="{{ url_for('static', filename='uploads/' + profile['profile_pic']) }}" alt="Profile Picture">
+    <div>
+        <h1>{{ user }}'s Profile</h1>
+        <p>Bio: {{ profile['bio'] }}</p>
+        {% if is_following %}
+            <a href="/unfollow/{{ user }}">Unfollow</a>
+        {% else %}
+            <a href="/follow/{{ user }}">Follow</a>
+        {% endif %}
+    </div>
+</div>
+
+<h2>Posts</h2>
+<div class="post-section">
+    {% for post in posts %}
+    <div class="post">
+        <img src="{{ url_for('static', filename='uploads/' + post.image) }}" alt="Post Image">
+        <p>{{ post.caption }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
